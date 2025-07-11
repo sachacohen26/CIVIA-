@@ -1,44 +1,49 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Connexion Civia</title>
-  <script type="module">
-    // Remplace ces valeurs par celles de ton propre projet Firebase :
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  <title>Connexion à Civia</title>
 
+  <!-- Scripts Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+
+  <script>
+    // Configuration de ton projet Firebase
     const firebaseConfig = {
-      apiKey: "TA_CLE_API",
-      authDomain: "TON_PROJET.firebaseapp.com",
-      projectId: "TON_PROJECT_ID",
-      storageBucket: "TON_PROJET.appspot.com",
-      messagingSenderId: "TON_SENDER_ID",
-      appId: "TON_APP_ID"
+      apiKey: "AIzaSyBiiy6MBF6zS2fW2KeHR3Md5UoySsYzzZA",
+      authDomain: "civia-179ef.firebaseapp.com",
+      projectId: "civia-179ef",
+      storageBucket: "civia-179ef.appspot.com",
+      messagingSenderId: "197949120853",
+      appId: "1:197949120853:web:dbad06cc1caad6d93aa8fdc",
+      measurementId: "G-8731HZBVLM"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    // Initialisation de Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-    window.login = function () {
+    // Fonction de connexion
+    function login() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      signInWithEmailAndPassword(auth, email, password)
+      auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
           alert("Connexion réussie !");
-          window.location.href = "index.html"; // ou autre page
+          window.location.href = "index.html"; // redirection après connexion
         })
         .catch((error) => {
           alert("Erreur : " + error.message);
         });
-    };
+    }
   </script>
 </head>
 <body>
   <h2>Connexion à Civia</h2>
-  <input type="email" id="email" placeholder="Adresse e-mail" /><br><br>
-  <input type="password" id="password" placeholder="Mot de passe" /><br><br>
+  <input type="email" id="email" placeholder="Adresse e-mail"><br><br>
+  <input type="password" id="password" placeholder="Mot de passe"><br><br>
   <button onclick="login()">Se connecter</button>
 </body>
 </html>
