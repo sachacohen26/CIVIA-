@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Accueil - Civia</title>
+  <title>Civia</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,12 +13,13 @@
     nav {
       background-color: #2c3e50;
       padding: 15px;
+      text-align: center;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      margin-right: 20px;
+      margin: 0 15px;
       font-weight: bold;
     }
 
@@ -29,11 +30,55 @@
     .content {
       padding: 20px;
     }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 5px 0;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .suggestion {
+      margin-top: 20px;
+    }
   </style>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBliy6MBfB62Sf2Wk2HR3Md5UoySsYzzZA",
+      authDomain: "civia-179ef.firebaseapp.com",
+      projectId: "civia-179ef",
+      storageBucket: "civia-179ef.appspot.com",
+      messagingSenderId: "197949120853",
+      appId: "1:197949120853:web:dbad06cc1caad6d93aa8fdc",
+      measurementId: "G-8731HZBVLM"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function verifierConnexion(action) {
+      const user = auth.currentUser;
+      if (user) {
+        alert("✅ Vous êtes connecté. " + action);
+      } else {
+        alert("❌ Veuillez vous connecter pour accéder à cette fonctionnalité.");
+      }
+    }
+  </script>
 </head>
 <body>
 
-  <!-- Barre de navigation -->
   <nav>
     <a href="index.html">Accueil</a>
     <a href="#">À propos</a>
@@ -41,11 +86,21 @@
     <a href="login.html">Connexion / Inscription</a>
   </nav>
 
-  <!-- Contenu principal -->
   <div class="content">
-    <h1>Bienvenue sur Civia</h1>
-    <p>Votre assistant de documents personnels.</p>
-    <!-- Tu pourras ajouter ici plus tard : documents, actions, suggestions, etc. -->
+    <h2>Documents</h2>
+    <p>Permis de conduire – Délivré le 7 avr. 2020 <button onclick="verifierConnexion('Permis de conduire')">Afficher</button></p>
+    <p>Passeport – Expire le 14 nov. 2027 <button onclick="verifierConnexion('Passeport')">Afficher</button></p>
+    <p>Carte vitale <button onclick="verifierConnexion('Carte vitale')">Afficher</button></p>
+    <p>Avis d'impôt <button onclick="verifierConnexion('Avis d’impôt')">Afficher</button></p>
+
+    <h2>Passer à l’action</h2>
+    <button onclick="verifierConnexion('Générer justificatif')">Générer justificatif</button>
+    <button onclick="verifierConnexion('Renouveler carte')">Renouveler carte</button>
+
+    <div class="suggestion">
+      <h2>Suggestions</h2>
+      <p>💡 Vous pouvez renouveler votre passeport en ligne <button onclick="verifierConnexion('Renouveler passeport')">Renouveler</button></p>
+    </div>
   </div>
 
 </body>
