@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Uploader un fichier</title>
+</head>
+<body>
+  <h2>Uploader un fichier</h2>
+
+  <input type="file" id="fileInput" />
+  <button onclick="uploadFile()">Envoyer</button>
+
+  <p id="status"></p>
+
+  <script type="module">
+    // Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "TON_API_KEY",
+      authDomain: "TON_AUTH_DOMAIN",
+      projectId: "TON_PROJECT_ID",
+      storageBucket: "TON_STORAGE_BUCKET",
+      messagingSenderId: "TON_SENDER_ID",
+      appId: "TON_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    function uploadFile() {
+      const file = document.getElementById('fileInput').files[0];
+      if (!file) return alert("Choisis un fichier");
+
+      const storageRef = ref(storage, 'uploads/' + file.name);
+      uploadBytes(storageRef, file)
+        .then(() => document.getElementById("status").innerText = "✅ Fichier envoyé avec succès !")
+        .catch(error => document.getElementById("status").innerText = "❌ Erreur : " + error.message);
+    }
+  </script>
+</body>
+</html>
