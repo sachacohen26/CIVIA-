@@ -9,37 +9,45 @@
 
   <input type="text" id="prenom" placeholder="Prénom"><br><br>
   <input type="text" id="nom" placeholder="Nom"><br><br>
-  <input type="email" id="email" placeholder="Adresse e-mail"><br><br>
+  <input type="email" id="email" placeholder="Adresse email"><br><br>
   <input type="password" id="password" placeholder="Mot de passe"><br><br>
 
-  <button onclick="register()">S'inscrire</button><br><br>
+  <button onclick="register()">S’inscrire</button><br><br>
 
   <a href="login.html">Déjà un compte ? Se connecter</a>
 
   <!-- Scripts Firebase -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
 
+  <script>
+    // Configuration Firebase
     const firebaseConfig = {
-      apiKey: "AIzaSyBliy6MBF62s5F2WkE2RH3Md5UoySsYzzA",
+      apiKey: "AIzaSyBi1y6MBF62s5F2WKzHR3M5UoySyZZzZA",
       authDomain: "civia-179ef.firebaseapp.com",
       projectId: "civia-179ef",
       storageBucket: "civia-179ef.appspot.com",
       messagingSenderId: "197949120853",
-      appId: "1:197949120853:web:dbad06d6ccaad6d93aa8fdc"
+      appId: "1:197949120853:web:d0ad66caca0d93aa8f8dc"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    // Initialisation
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-    window.register = function () {
+    // Fonction d'inscription
+    function register() {
+      const prenom = document.getElementById("prenom").value;
+      const nom = document.getElementById("nom").value;
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
-      const nom = document.getElementById("nom").value;
-      const prenom = document.getElementById("prenom").value;
 
-      createUserWithEmailAndPassword(auth, email, password)
+      if (!prenom || !nom || !email || !password) {
+        alert("Merci de remplir tous les champs.");
+        return;
+      }
+
+      auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           alert("Compte créé avec succès !");
           window.location.href = "index.html";
@@ -47,7 +55,7 @@
         .catch((error) => {
           alert("Erreur : " + error.message);
         });
-    };
+    }
   </script>
 </body>
 </html>
