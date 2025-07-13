@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Connexion à Civia</title>
+</head>
+<body>
+  <h2>Connexion à Civia</h2>
+  <input type="email" id="email" placeholder="Adresse e-mail"><br>
+  <input type="password" id="password" placeholder="Mot de passe"><br>
+  <button onclick="login()">Se connecter</button>
+  <p>Pas encore inscrit ? <a href="register.html">S'inscrire</a></p>
 
-  <!-- Scripts Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-  <script>
-    // Configuration Firebase
     const firebaseConfig = {
-      apiKey: "AIzaSyBliy6MBfB62Sf2Wk2HR3Md5UoySsYzzZA",
-      authDomain: "civia-179ef.firebaseapp.com",
-      projectId: "civia-179ef",
-      storageBucket: "civia-179ef.appspot.com",
-      messagingSenderId: "197949120853",
-      appId: "1:197949120853:web:dba0d6cc1caad6d93aa8fdc",
-      measurementId: "G-8731HZBVLM"
+      apiKey: "AIzaSyBlS6afyMQD4TIkTMViHSR_R9WS9xlpS8E",
+      authDomain: "civia-backend.firebaseapp.com",
+      projectId: "civia-backend",
+      storageBucket: "civia-backend.firebasestorage.app",
+      messagingSenderId: "167320837736",
+      appId: "1:167320837736:web:af4b5afdff8345914625dd"
     };
 
-    // Initialisation Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    // Fonction de connexion
-    function login() {
+    window.login = function () {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
           alert("Connexion réussie !");
-          window.location.href = "index.html";
+          window.location.href = "upload.html";
         })
         .catch((error) => {
           alert("Erreur : " + error.message);
         });
     }
   </script>
-</head>
-<body>
-  <h2>Connexion à Civia</h2>
-  <input type="email" id="email" placeholder="Adresse e-mail"><br><br>
-  <input type="password" id="password" placeholder="Mot de passe"><br><br>
-  <button onclick="login()">Se connecter</button><br><br>
-
-  <!-- Lien vers inscription -->
-  <p>Pas encore de compte ? <a href="register.html">S’inscrire</a></p>
 </body>
 </html>
