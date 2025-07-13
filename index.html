@@ -2,49 +2,51 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Civia</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Accueil - Civia</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #2c3e50;
+      padding: 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Civia</h1>
-    <nav>
-      <a href="#">Accueil</a>
-      <a href="#">À propos</a>
-      <a href="#">Contact</a>
-      <button onclick="window.location.href='login.html'">Connexion / Inscription</button>
-    </nav>
-  </header>
 
-  <section>
-    <h2>Documents</h2>
-    <ul>
-      <li>Permis de conduire – Délivré le 7 avr. 2020
-        <button>Afficher</button>
-      </li>
-      <li>Passeport – Expire le 14 nov. 2027
-        <button>Afficher</button>
-      </li>
-      <li>Carte vitale
-        <button>Afficher</button>
-      </li>
-      <li>Avis d’impôt
-        <button>Afficher</button>
-      </li>
-    </ul>
-  </section>
+  <!-- Barre de navigation -->
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="#">À propos</a>
+    <a href="#">Contact</a>
+    <a href="login.html">Connexion / Inscription</a>
+  </nav>
 
-  <section>
-    <h2>Passer à l’action</h2>
-    <button>Générer justificatif</button>
-    <button>Renouveler carte</button>
-  </section>
+  <!-- Contenu principal -->
+  <div class="content">
+    <h1>Bienvenue sur Civia</h1>
+    <p>Votre assistant de documents personnels.</p>
+    <!-- Tu pourras ajouter ici plus tard : documents, actions, suggestions, etc. -->
+  </div>
 
-  <section>
-    <h2>Suggestions</h2>
-    <p>💡 Vous pouvez renouveler votre passeport en ligne
-      <button>Renouveler</button>
-    </p>
-  </section>
 </body>
 </html>
