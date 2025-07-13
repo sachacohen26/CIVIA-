@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inscription à Civia</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBliy6MBF6zS2fW2kHR3Md5UoySsYzzZA",
+      authDomain: "civia-179ef.firebaseapp.com",
+      projectId: "civia-179ef",
+      storageBucket: "civia-179ef.appspot.com",
+      messagingSenderId: "197949120853",
+      appId: "1:197949120853:web:dbad06cc1caad6d93aa8fdc",
+      measurementId: "G-8731HZBVLM"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+    function register() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const firstName = document.getElementById("firstname").value;
+      const lastName = document.getElementById("lastname").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          // Enregistre le nom et prénom dans Firebase Database
+          db.ref("users/" + user.uid).set({
+            prenom: firstName,
+            nom: lastName,
+            email: email
+          });
+
+          alert("Inscription réussie !");
+          window.location.href = "index.html"; // Redirection
+        })
+        .catch((error) => {
+          alert("Erreur : " + error.message);
+        });
+    }
+  </script>
+</head>
+<body>
+  <h2>Inscription à Civia</h2>
+
+  <input type="text" id="firstname" placeholder="Prénom" /><br /><br />
+  <input type="text" id="lastname" placeholder="Nom" /><br /><br />
+  <input type="email" id="email" placeholder="Adresse e-mail" /><br /><br />
+  <input type="password" id="password" placeholder="Mot de passe" /><br /><br />
+
+  <button onclick="register()">S'inscrire</button><br /><br />
+
+  <a href="login.html">Déjà un compte ? Se connecter</a>
+</body>
+</html>
