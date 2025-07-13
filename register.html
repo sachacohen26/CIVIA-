@@ -16,12 +16,12 @@
 
   <a href="login.html">Déjà un compte ? Se connecter</a>
 
-  <!-- Scripts Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
   <script>
-    // Configuration Firebase
+    // Config Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyBi1y6MBF62s5F2WKzHR3M5UoySyZZzZA",
       authDomain: "civia-179ef.firebaseapp.com",
@@ -31,25 +31,25 @@
       appId: "1:197949120853:web:d0ad66caca0d93aa8f8dc"
     };
 
-    // Initialisation
+    // Initialiser Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
     // Fonction d'inscription
     function register() {
-      const prenom = document.getElementById("prenom").value;
-      const nom = document.getElementById("nom").value;
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
+      const nom = document.getElementById("nom").value;
+      const prenom = document.getElementById("prenom").value;
 
-      if (!prenom || !nom || !email || !password) {
+      if (!email || !password || !nom || !prenom) {
         alert("Merci de remplir tous les champs.");
         return;
       }
 
       auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          alert("Compte créé avec succès !");
+          alert("Compte créé !");
           window.location.href = "index.html";
         })
         .catch((error) => {
