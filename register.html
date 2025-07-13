@@ -3,43 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Inscription à Civia</title>
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
-
-  <script>
-    // Configuration Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyBliy6MBF62s5F2WkE2RH3Md5UoySsYzzA",
-      authDomain: "civia-179ef.firebaseapp.com",
-      projectId: "civia-179ef",
-      storageBucket: "civia-179ef.appspot.com",
-      messagingSenderId: "197949120853",
-      appId: "1:197949120853:web:dbad06d6ccaad6d93aa8fdc"
-    };
-
-    // Initialisation Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    // Fonction inscription
-    function register() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const nom = document.getElementById("nom").value;
-      const prenom = document.getElementById("prenom").value;
-
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          alert("Compte créé avec succès !");
-          window.location.href = "index.html";
-        })
-        .catch((error) => {
-          alert("Erreur : " + error.message);
-        });
-    }
-  </script>
 </head>
 <body>
   <h2>Inscription à Civia</h2>
@@ -52,5 +15,39 @@
   <button onclick="register()">S'inscrire</button><br><br>
 
   <a href="login.html">Déjà un compte ? Se connecter</a>
+
+  <!-- Scripts Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBliy6MBF62s5F2WkE2RH3Md5UoySsYzzA",
+      authDomain: "civia-179ef.firebaseapp.com",
+      projectId: "civia-179ef",
+      storageBucket: "civia-179ef.appspot.com",
+      messagingSenderId: "197949120853",
+      appId: "1:197949120853:web:dbad06d6ccaad6d93aa8fdc"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.register = function () {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const nom = document.getElementById("nom").value;
+      const prenom = document.getElementById("prenom").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Compte créé avec succès !");
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          alert("Erreur : " + error.message);
+        });
+    };
+  </script>
 </body>
 </html>
